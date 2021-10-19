@@ -1,0 +1,122 @@
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+	DeveloperFactory developerFactory1 = CreateNewDeveloper("java");
+    Developer developer1 = developerFactory1.createnewdeveloper();
+
+    developer1.writecode();
+
+    DeveloperFactory developerFactory2 = CreateNewDeveloper("python");
+    Developer developer2 = developerFactory2.createnewdeveloper();
+
+    developer2.writecode();
+
+    DeveloperFactory developerFactory3 = CreateNewDeveloper("cpp");
+    Developer developer3 = developerFactory3.createnewdeveloper();
+
+    developer3.writecode();
+
+    DeveloperFactory developerFactory4 = CreateNewDeveloper("C#");
+    Developer developer4 = developerFactory4.createnewdeveloper();
+
+    developer4.writecode();
+    }
+
+    static DeveloperFactory CreateNewDeveloper(String spec) {
+        if(spec == "java"){
+            return new JavaDeveloperFactory();
+        }
+        else if (spec == "python"){
+            return new PythonDeveloperFactory();
+        }
+        else if (spec == "cpp"){
+            return new CppDeveloperFactory();
+        }
+        else {
+            throw new RuntimeException(spec + " такой специальности еще нет в программе");
+        }
+    }
+}
+
+_______________________________________________________________________________________________________________
+
+package com.company;
+
+public interface Developer {
+    void writecode();
+}
+
+_______________________________________________________________________________________________________________
+
+package com.company;
+
+public interface DeveloperFactory {
+    Developer createnewdeveloper();
+}
+
+_______________________________________________________________________________________________________________
+
+package com.company;
+
+public class PythonDeveloperFactory implements DeveloperFactory{
+    public Developer createnewdeveloper() {
+        return new PythonDeveloper();
+    }
+}
+
+_______________________________________________________________________________________________________________
+
+package com.company;
+
+public class JavaDeveloperFactory implements DeveloperFactory{
+    @Override
+    public Developer createnewdeveloper() {
+        return new JavaDeveloper();
+    }
+}
+
+_______________________________________________________________________________________________________________
+
+package com.company;
+
+public class CppDeveloperFactory implements DeveloperFactory{
+    @Override
+    public Developer createnewdeveloper() {
+        return new CppDeveloper();
+    }
+}
+
+_______________________________________________________________________________________________________________
+
+package com.company;
+
+public class CppDeveloper implements Developer{
+    @Override
+    public void writecode() {
+        System.out.println("I write C++ code...");
+    }
+}
+
+_______________________________________________________________________________________________________________
+
+package com.company;
+
+public class JavaDeveloper implements Developer{
+    @Override
+    public void writecode() {
+        System.out.println("I write Java code...");
+    }
+}
+
+_______________________________________________________________________________________________________________
+
+package com.company;
+
+public class PythonDeveloper implements Developer{
+    @Override
+    public void writecode() {
+        System.out.println("I write Python code...");
+    }
+}
